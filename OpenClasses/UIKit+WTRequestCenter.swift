@@ -12,5 +12,11 @@ extension UIAlertView {
     static func showWithTitle(title:String?,message:String?){
         var alert:UIAlertView? = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: nil);
         alert?.show();
+        
+        
+        WTRequestCenter.performBlock({ () -> Void in
+            alert?.dismissWithClickedButtonIndex(0, animated: true)
+        }, afterDelay: 0)
+        
     }
 }

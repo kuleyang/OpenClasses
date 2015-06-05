@@ -240,6 +240,14 @@ class WTRequestCenter: NSObject {
     }
     
     
+    static func performBlock(block:() -> Void, afterDelay:Int64){
+        var queue = dispatch_get_main_queue()
+        var t = dispatch_time(DISPATCH_TIME_NOW, afterDelay*1000*1000*1000);
+        dispatch_after(t, queue, block)
+        
+    }
+    
+    
     
     
     
