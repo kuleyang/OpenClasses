@@ -22,9 +22,34 @@ extension UIAlertView {
 }
 
 
+var uiimageStoreKey:String? = "uiimage Store Key"
 extension UIImageView{
-    func setImageWithURL(url:String?){
-        WTRequestCenter.doURLRequest(Method.GET, urlString: url!, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+    
+    
+    
+    
+    func setImageWithURL(url:URLStringConvertible){
+        var task = WTRequestCenter.sharedInstance.task(Method.GET, url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+                var image:UIImage? = UIImage(data: data);
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.image = image
+                });
+            })
+            
+            
+
+        }) { (error) -> Void in
+            
+        }
+        
+        
+        
+        
+        WTRequestCenter.doURLRequest(Method.GET, urlString: url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+            
+            
+            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
                 var image:UIImage? = UIImage(data: data);
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -34,6 +59,8 @@ extension UIImageView{
         }) { (error) -> Void in
             
         }
+        
+        
     }
 }
 

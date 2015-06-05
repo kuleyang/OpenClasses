@@ -210,33 +210,21 @@ class WTRequestCenter: NSObject {
         
     }
     
+    static let sharedCache:NSURLCache = {
+        let cache:NSURLCache = NSURLCache(memoryCapacity: 1000*1000*1000, diskCapacity: 1000*1000*1000, diskPath: "WTRequestCenter")
+        return cache
+    }()
+    
+    
     internal static let sharedInstance: WTRequestCenter = {
         let configuration: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
         
         return WTRequestCenter(configuration: configuration)
         }()
     
-    func request(method: Method,_ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL) -> NSMutableURLRequest {
-        var request:NSMutableURLRequest?
-        request = requestWith(URLString, method: method);
-        request = encoding.encode(request!, parameters: parameters).0 as? NSMutableURLRequest;
-        
-        return request!;
-        
-    }
     
-    func requestWith(urlString:URLStringConvertible,method:Method) -> NSMutableURLRequest
-    {
-        let request:NSMutableURLRequest?
-        var url :NSURL?
-
-        url = NSURL(string: urlString.URLString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
-        
-        
-        request = NSMutableURLRequest(URL: url!)
-        request?.HTTPMethod = method.rawValue;
-        return request!;
-    }
+    
+    
     
     
     static func performBlock(block:() -> Void, afterDelay:Int64){
@@ -273,7 +261,7 @@ class WTRequestCenter: NSObject {
         }
         
     }
-    
+    // MARK: - static method
     
     
     class func doURLRequest(method:Method,urlString:URLStringConvertible,parameters:[String: AnyObject]? = nil,encoding: ParameterEncoding = .URL,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)
@@ -283,7 +271,43 @@ class WTRequestCenter: NSObject {
         self.doURLRequest(request, finished: finished, failed: failed)
     }
     
+    // MARK: - instance method
     
+    func task(method: Method,_ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)->NSURLSessionTask{
+        var request:NSMutableURLRequest?
+        request = requestWith(URLString, method: method);
+        request = encoding.encode(request!, parameters: parameters).0 as? NSMutableURLRequest;
+        var task = self.session.dataTaskWithRequest(request!, completionHandler: { (data, response, error) -> Void in
+            if ((error) != nil){
+                finished(response: response,data: data)
+            }else{
+                failed(error: error)
+            }
+            
+        })
+        return task
+    }
     
+    func requestWith(urlString:URLStringConvertible,method:Method) -> NSMutableURLRequest
+    {
+        let request:NSMutableURLRequest?
+        var url :NSURL?
+        
+        url = NSURL(string: urlString.URLString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
+        
+        
+        request = NSMutableURLRequest(URL: url!)
+        request?.HTTPMethod = method.rawValue;
+        return request!;
+    }
+    
+    func request(method: Method,_ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL) -> NSMutableURLRequest {
+        var request:NSMutableURLRequest?
+        request = requestWith(URLString, method: method);
+        request = encoding.encode(request!, parameters: parameters).0 as? NSMutableURLRequest;
+        
+        return request!;
+        
+    }
     
 }
