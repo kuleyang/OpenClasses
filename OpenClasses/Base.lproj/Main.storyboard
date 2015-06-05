@@ -37,13 +37,13 @@
                             <outlet property="delegate" destination="ZTO-cX-NzB" id="rGV-hx-EBU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="25j-Cm-chv"/>
+                    <navigationItem key="navigationItem" title="首页" id="25j-Cm-chv"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEW-B6-xoo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1747" y="-465"/>
         </scene>
-        <!--Root View Controller-->
+        <!--全部课程-->
         <scene sceneID="R8E-9g-9HS">
             <objects>
                 <tableViewController id="QcJ-sg-wIa" sceneMemberID="viewController">
@@ -56,13 +56,13 @@
                             <outlet property="delegate" destination="QcJ-sg-wIa" id="e5U-kA-BwP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="1zC-cL-QWJ"/>
+                    <navigationItem key="navigationItem" title="全部课程" id="1zC-cL-QWJ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nt2-Ml-qG0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1755" y="347"/>
         </scene>
-        <!--Root View Controller-->
+        <!--我-->
         <scene sceneID="09B-0Z-TKY">
             <objects>
                 <tableViewController id="SjU-Yy-ytu" sceneMemberID="viewController">
@@ -75,7 +75,7 @@
                             <outlet property="delegate" destination="SjU-Yy-ytu" id="9CC-yb-pyo"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="xCK-Ll-bk9"/>
+                    <navigationItem key="navigationItem" title="我" id="xCK-Ll-bk9"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bp3-jc-ias" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -118,7 +118,7 @@
         <!--首页-->
         <scene sceneID="YxO-NN-O6v">
             <objects>
-                <navigationController title="首页" id="eBi-Pg-vo6" sceneMemberID="viewController">
+                <navigationController id="eBi-Pg-vo6" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="首页" id="37P-5h-j0L"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tuC-3f-Vr6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

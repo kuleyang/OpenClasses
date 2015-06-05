@@ -118,9 +118,8 @@
 		273B4C811B2153CF000AA559 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				273B4C831B215411000AA559 /* OCAllClassesVC.swift */,
-				273B4C851B215427000AA559 /* OCHomeVC.swift */,
-				273B4C871B215435000AA559 /* OCMyVC.swift */,
+				273B4C8A1B21653D000AA559 /* ViewControllers */,
+				273B4C891B216538000AA559 /* Views */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -135,6 +134,23 @@
 				273B4C681B21517D000AA559 /* LaunchScreen.xib */,
 			);
 			name = main;
+			sourceTree = "<group>";
+		};
+		273B4C891B216538000AA559 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		273B4C8A1B21653D000AA559 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				273B4C851B215427000AA559 /* OCHomeVC.swift */,
+				273B4C831B215411000AA559 /* OCAllClassesVC.swift */,
+				273B4C871B215435000AA559 /* OCMyVC.swift */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
