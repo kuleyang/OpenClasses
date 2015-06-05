@@ -273,10 +273,17 @@ class WTRequestCenter: NSObject {
     
     // MARK: - instance method
     
-    func task(method: Method,_ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)->NSURLSessionTask{
+    
+    /*
+        返回一个task
+    */
+    func task(method: Method,_ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)->NSURLSessionDataTask{
         var request:NSMutableURLRequest?
         request = requestWith(URLString, method: method);
-        request = encoding.encode(request!, parameters: parameters).0 as? NSMutableURLRequest;
+        request = encoding.encode(request!, parameters: parameters).0 as? NSMutableURLRequest
+        
+        
+        
         var task = self.session.dataTaskWithRequest(request!, completionHandler: { (data, response, error) -> Void in
             if ((error) != nil){
                 finished(response: response,data: data)
@@ -287,6 +294,8 @@ class WTRequestCenter: NSObject {
         })
         return task
     }
+    
+    
     
     func requestWith(urlString:URLStringConvertible,method:Method) -> NSMutableURLRequest
     {

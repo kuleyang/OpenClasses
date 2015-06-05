@@ -37,7 +37,7 @@ extension UIImageView{
                 });
             })
             
-            
+//            WTRequestCenter.sharedCache.storeCachedResponse(response, forDataTask: task)
 
         }) { (error) -> Void in
             
