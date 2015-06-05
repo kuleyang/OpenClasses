@@ -10,14 +10,31 @@ import UIKit
 
 class OCHomeVC: UITableViewController {
 
+
+    var homeArray:NSMutableArray?
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        homeArray = NSMutableArray()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.request()
+    }
+    
+    
+    
+    func request(){
+        WTRequestCenter.doURLRequest(Method.GET, urlString: "http://domin.com", parameters: ["a":"1"], encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+            
+            var obj: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)
+            
+            println(obj)
+            
+            }) { (error) -> Void in
+                OCModelCenter.showError(error)
+        };
     }
 
     override func didReceiveMemoryWarning() {
