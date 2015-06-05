@@ -229,10 +229,9 @@ class WTRequestCenter: NSObject {
     {
         let request:NSMutableURLRequest?
         var url :NSURL?
-        if(true)
-        {
-            url = NSURL(string: urlString.URLString)
-        }
+
+        url = NSURL(string: urlString.URLString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!)
+        
         
         request = NSMutableURLRequest(URL: url!)
         request?.HTTPMethod = method.rawValue;
@@ -253,7 +252,7 @@ class WTRequestCenter: NSObject {
     
     class func doURLRequest(request:NSURLRequest,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)
     {
-        
+        /*
         NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
             if (error == nil){
                 finished(response: response, data: data);
@@ -262,7 +261,8 @@ class WTRequestCenter: NSObject {
                 failed(error: error);
             }
         })
-        /*
+*/
+        
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
             if (error == nil){
                 finished(response: response, data: data);
@@ -271,7 +271,7 @@ class WTRequestCenter: NSObject {
                 failed(error: error);
             }
         }
-        */
+        
     }
     
     

@@ -27,7 +27,7 @@
         <!--首页-->
         <scene sceneID="HUm-ws-YeX">
             <objects>
-                <tableViewController title="首页" id="ZTO-cX-NzB" sceneMemberID="viewController">
+                <tableViewController title="首页" id="ZTO-cX-NzB" customClass="OCHomeVC" customModule="OpenClasses" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0Af-2d-f1v">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

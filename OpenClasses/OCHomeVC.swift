@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OCHomeVC: UITableViewController {
+class OCHomeVC: UITableViewController,UITableViewDelegate {
 
 
     var homeArray:NSMutableArray?
@@ -18,9 +18,21 @@ class OCHomeVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        homeArray = NSMutableArray()
+        
+        configModel()
+        configView()
+//        request()
 
-        self.request()
+        
+    }
+    
+    func configModel(){
+        homeArray = NSMutableArray()
+    }
+    
+    func configView(){
+        self.tableView.registerNib(UINib(nibName: "OCHomeTitleCell", bundle: nil), forCellReuseIdentifier: "OCHomeTitleCell");
+        
     }
     
     
@@ -53,18 +65,29 @@ class OCHomeVC: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return 1
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("OCHomeTitleCell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
 
         return cell
     }
-    */
+    //    MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
+        var height:CGFloat!
+        height = 100
+        
+        
+        return height
+    
+    }
+    
+    
 
     /*
     // Override to support conditional editing of the table view.
