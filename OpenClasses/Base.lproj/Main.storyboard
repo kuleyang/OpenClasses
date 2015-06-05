@@ -81,11 +81,11 @@
             </objects>
             <point key="canvasLocation" x="1747" y="1171"/>
         </scene>
-        <!--Item-->
+        <!--我-->
         <scene sceneID="i9l-6D-DVI">
             <objects>
                 <navigationController id="B2x-YJ-lRZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="gsg-aS-HEU"/>
+                    <tabBarItem key="tabBarItem" title="我" id="gsg-aS-HEU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jN5-SX-SlQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -98,11 +98,11 @@
             </objects>
             <point key="canvasLocation" x="927" y="1171"/>
         </scene>
-        <!--Item-->
+        <!--全部课程-->
         <scene sceneID="Gb0-LP-1hq">
             <objects>
                 <navigationController id="eZK-0d-GBd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="QBE-8s-BUR"/>
+                    <tabBarItem key="tabBarItem" title="全部课程" id="QBE-8s-BUR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hF8-iY-dtG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

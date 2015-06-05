@@ -13,6 +13,9 @@
 		273B4C671B21517D000AA559 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 273B4C661B21517D000AA559 /* Images.xcassets */; };
 		273B4C6A1B21517D000AA559 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 273B4C681B21517D000AA559 /* LaunchScreen.xib */; };
 		273B4C761B21517D000AA559 /* OpenClassesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B4C751B21517D000AA559 /* OpenClassesTests.swift */; };
+		273B4C841B215411000AA559 /* OCAllClassesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B4C831B215411000AA559 /* OCAllClassesVC.swift */; };
+		273B4C861B215427000AA559 /* OCHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B4C851B215427000AA559 /* OCHomeVC.swift */; };
+		273B4C881B215435000AA559 /* OCMyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B4C871B215435000AA559 /* OCMyVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		273B4C6F1B21517D000AA559 /* OpenClassesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenClassesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		273B4C741B21517D000AA559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		273B4C751B21517D000AA559 /* OpenClassesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenClassesTests.swift; sourceTree = "<group>"; };
+		273B4C831B215411000AA559 /* OCAllClassesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCAllClassesVC.swift; sourceTree = "<group>"; };
+		273B4C851B215427000AA559 /* OCHomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCHomeVC.swift; sourceTree = "<group>"; };
+		273B4C871B215435000AA559 /* OCMyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCMyVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +83,8 @@
 		273B4C5C1B21517D000AA559 /* OpenClasses */ = {
 			isa = PBXGroup;
 			children = (
-				273B4C5F1B21517D000AA559 /* AppDelegate.swift */,
-				273B4C611B21517D000AA559 /* ViewController.swift */,
-				273B4C631B21517D000AA559 /* Main.storyboard */,
-				273B4C661B21517D000AA559 /* Images.xcassets */,
-				273B4C681B21517D000AA559 /* LaunchScreen.xib */,
+				273B4C821B2153D7000AA559 /* main */,
+				273B4C811B2153CF000AA559 /* Classes */,
 				273B4C5D1B21517D000AA559 /* Supporting Files */,
 			);
 			path = OpenClasses;
@@ -110,6 +113,28 @@
 				273B4C741B21517D000AA559 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		273B4C811B2153CF000AA559 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				273B4C831B215411000AA559 /* OCAllClassesVC.swift */,
+				273B4C851B215427000AA559 /* OCHomeVC.swift */,
+				273B4C871B215435000AA559 /* OCMyVC.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		273B4C821B2153D7000AA559 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				273B4C5F1B21517D000AA559 /* AppDelegate.swift */,
+				273B4C611B21517D000AA559 /* ViewController.swift */,
+				273B4C631B21517D000AA559 /* Main.storyboard */,
+				273B4C661B21517D000AA559 /* Images.xcassets */,
+				273B4C681B21517D000AA559 /* LaunchScreen.xib */,
+			);
+			name = main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +181,7 @@
 		273B4C521B21517D000AA559 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = OC;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = mike;
 				TargetAttributes = {
@@ -213,6 +239,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				273B4C621B21517D000AA559 /* ViewController.swift in Sources */,
+				273B4C861B215427000AA559 /* OCHomeVC.swift in Sources */,
+				273B4C841B215411000AA559 /* OCAllClassesVC.swift in Sources */,
+				273B4C881B215435000AA559 /* OCMyVC.swift in Sources */,
 				273B4C601B21517D000AA559 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +440,7 @@
 				273B4C7B1B21517D000AA559 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		273B4C7C1B21517D000AA559 /* Build configuration list for PBXNativeTarget "OpenClassesTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +449,7 @@
 				273B4C7E1B21517D000AA559 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
