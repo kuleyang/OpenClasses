@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1D2D8625-D468-4077-93F1-D610D0BB5028</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OpenClasses</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DFA0B907A0BBC1A59FBB7BA42ECB0747D00B8394</key>
+		<string>https://github.com/swtlovewtt/OpenClasses.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>OpenClasses.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DFA0B907A0BBC1A59FBB7BA42ECB0747D00B8394</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/swtlovewtt/OpenClasses.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DFA0B907A0BBC1A59FBB7BA42ECB0747D00B8394</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DFA0B907A0BBC1A59FBB7BA42ECB0747D00B8394</string>
+			<key>IDESourceControlWCCName</key>
+			<string>OpenClasses</string>
+		</dict>
+	</array>
+</dict>
+</plist>
