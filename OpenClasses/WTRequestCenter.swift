@@ -186,7 +186,7 @@ extension NSURLRequest: URLRequestConvertible {
 }
 
 
-class WTRequestCenter: NSObject {
+class WTRequestCenter: NSObject,NSURLSessionDelegate {
 
     
     /// The underlying session.
@@ -201,10 +201,10 @@ class WTRequestCenter: NSObject {
     internal let delegateQueue:NSOperationQueue
 
     required init(configuration:NSURLSessionConfiguration? = nil){
+
+        delegateQueue = NSOperationQueue()
         
-        delegateQueue = NSOperationQueue();
-        
-        self.session = NSURLSession(configuration: configuration, delegate: nil, delegateQueue: delegateQueue)
+        self.session = NSURLSession(configuration: configuration, delegate: SessionDelegate(), delegateQueue: delegateQueue)
         
         
         
@@ -221,7 +221,7 @@ class WTRequestCenter: NSObject {
         
         return WTRequestCenter(configuration: configuration)
         }()
-    
+
     
     
     
@@ -263,7 +263,9 @@ class WTRequestCenter: NSObject {
     }
     // MARK: - static method
     
-    
+    /*!
+        安全请求，无需取消，不会产生任何崩溃
+    */
     class func doURLRequest(method:Method,urlString:URLStringConvertible,parameters:[String: AnyObject]? = nil,encoding: ParameterEncoding = .URL,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)
     {
         var request = self.sharedInstance.request(method, urlString, parameters: parameters, encoding: encoding)
@@ -277,7 +279,7 @@ class WTRequestCenter: NSObject {
     /*
         返回一个task
     */
-    func task(method: Method,_ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)->NSURLSessionDataTask{
+    func request(method: Method,_ URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)->NSURLSessionDataTask?{
         var request:NSMutableURLRequest?
         request = requestWith(URLString, method: method);
         request = encoding.encode(request!, parameters: parameters).0 as? NSMutableURLRequest
@@ -285,13 +287,53 @@ class WTRequestCenter: NSObject {
         
         
         var task = self.session.dataTaskWithRequest(request!, completionHandler: { (data, response, error) -> Void in
-            if ((error) != nil){
+            if ((response) != nil){
                 finished(response: response,data: data)
             }else{
                 failed(error: error)
             }
             
         })
+        task.resume();
+        return task
+    }
+    
+    
+    func GETUsingCache(URLString: URLStringConvertible, parameters: [String: AnyObject]? = nil, encoding: ParameterEncoding = .URL,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)->NSURLSessionDataTask?{
+        var request:NSMutableURLRequest?
+        request = requestWith(URLString, method: Method.GET);
+        request = encoding.encode(request!, parameters: parameters).0 as? NSMutableURLRequest
+        
+        
+        
+        var task:NSURLSessionDataTask?
+        
+        var cachedResponse:NSCachedURLResponse! = WTRequestCenter.sharedCache.cachedResponseForRequest(request!)
+        
+        if((cachedResponse) != nil){
+            finished(response: cachedResponse!.response, data: cachedResponse.data)
+        }else
+        {
+            task = self.session.dataTaskWithRequest(request!, completionHandler: { (data, response, error) -> Void in
+                if ((response) != nil){
+                    finished(response: response,data: data)
+                    
+                    cachedResponse = NSCachedURLResponse(response: response, data: data, userInfo: nil, storagePolicy: NSURLCacheStoragePolicy.Allowed)
+                    WTRequestCenter.sharedCache.storeCachedResponse(cachedResponse, forRequest: request!)
+                    
+                    
+                    
+                }else{
+                    failed(error: error)
+                }
+                
+            })
+            task?.resume();
+//            var state = task?.state
+//            println(state)
+            
+            
+        }
         return task
     }
     
@@ -319,4 +361,64 @@ class WTRequestCenter: NSObject {
         
     }
     
+    
+    
+    
+    //MARK - Session
+    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL){
+        
+    }
+    
+    
+    func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: (NSURLSessionResponseDisposition) -> Void){
+        
+    }
 }
+
+
+
+public final class SessionDelegate:NSObject,NSURLSessionDelegate,NSURLSessionTaskDelegate,NSURLSessionDataDelegate{
+    
+    override init() {
+        
+    }
+    
+    //NSURLSessionDelegate
+    public func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?){
+        
+    }
+    
+    
+    public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void){
+        
+    }
+    
+    
+    //-----------------------------NSURLSessionTaskDelegate-----------------------------
+    public func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?){
+        
+    }
+    
+    
+    
+    //-----------------------------NSURLSessionDataDelegate-----------------------------
+    
+    public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: (NSURLSessionResponseDisposition) -> Void){
+        println("didReceiveResponse")
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

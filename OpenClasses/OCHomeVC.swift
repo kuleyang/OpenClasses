@@ -21,7 +21,7 @@ class OCHomeVC: UITableViewController,UITableViewDelegate {
         
         configModel()
         configView()
-//        request()
+        request()
 
         
     }
@@ -38,15 +38,18 @@ class OCHomeVC: UITableViewController,UITableViewDelegate {
     
     
     func request(){
-        WTRequestCenter.doURLRequest(Method.GET, urlString: "http://domin.com", parameters: ["a":"1"], encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+//        WTRequestCenter.sharedInstance.GETUsingCache("http://www.baidu.com", parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+//
+//        }) { (error) -> Void in
+//            
+//        }
+        
+        
+        WTRequestCenter.sharedInstance.request(Method.GET, "http://www.baidu.com", parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
             
-            var obj: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: nil)
+        }) { (error) -> Void in
             
-            println(obj)
-            
-            }) { (error) -> Void in
-                OCModelCenter.showError(error)
-        };
+        }
     }
 
     override func didReceiveMemoryWarning() {

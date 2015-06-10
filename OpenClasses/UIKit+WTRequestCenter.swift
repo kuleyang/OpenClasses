@@ -27,31 +27,15 @@ extension UIImageView{
     
     
     
-    
+//    setImage
     func setImageWithURL(url:URLStringConvertible){
-        var task = WTRequestCenter.sharedInstance.task(Method.GET, url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+        
+        
+        
+        
+        WTRequestCenter.sharedInstance.GETUsingCache(url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
-                var image:UIImage? = UIImage(data: data);
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.image = image
-                });
-            })
-            
-//            WTRequestCenter.sharedCache.storeCachedResponse(response, forDataTask: task)
-
-        }) { (error) -> Void in
-            
-        }
-        
-        
-        
-        
-        WTRequestCenter.doURLRequest(Method.GET, urlString: url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
-            
-            
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
-                var image:UIImage? = UIImage(data: data);
+                var image:UIImage? = UIImage(data: data)
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.image = image
                 });
@@ -60,12 +44,57 @@ extension UIImageView{
             
         }
         
+    }
+    
+    
+    
+//    highlightedImage
+    func sethighlightedImageWithURL(url:URLStringConvertible){
+        
+        
+        
+        WTRequestCenter.sharedInstance.GETUsingCache(url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+                var image:UIImage? = UIImage(data: data)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.highlightedImage = image
+                })
+            })
+            }) { (error) -> Void in
+                
+        }
         
     }
 }
 
 extension UIButton{
+//    set image
+    func setImageWithURL(url:URLStringConvertible, forState state: UIControlState){
+        WTRequestCenter.sharedInstance.GETUsingCache(url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+                var image:UIImage? = UIImage(data: data)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.setImage(image, forState: state)
+                });
+            })
+            }) { (error) -> Void in
+                
+        }
+    }
     
+//    set bg image
+    func setBackgroundImageWithURL(url:URLStringConvertible, forState state: UIControlState){
+        WTRequestCenter.sharedInstance.GETUsingCache(url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+                var image:UIImage? = UIImage(data: data);
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.setBackgroundImage(image, forState: state)
+                });
+            })
+            }) { (error) -> Void in
+                
+        }
+    }
 }
 
 extension UIScrollView{
@@ -99,7 +128,7 @@ class WTNetworkActivityIndicatorManager:NSObject{
     var isNetworkActivityIndicatorVisible:Bool?
     
     
-    var activityCount:Int?
+    var activityCount:Int!
     var activityIndicatorVisibilityTimer:NSTimer?
     
     
