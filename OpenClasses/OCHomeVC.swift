@@ -38,18 +38,7 @@ class OCHomeVC: UITableViewController,UITableViewDelegate {
     
     
     func request(){
-//        WTRequestCenter.sharedInstance.GETUsingCache("http://www.baidu.com", parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
-//
-//        }) { (error) -> Void in
-//            
-//        }
-        
-        
-        WTRequestCenter.sharedInstance.request(Method.GET, "http://www.baidu.com", parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
-            
-        }) { (error) -> Void in
-            
-        }
+
     }
 
     override func didReceiveMemoryWarning() {

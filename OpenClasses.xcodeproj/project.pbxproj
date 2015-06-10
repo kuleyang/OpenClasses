@@ -17,7 +17,7 @@
 		273B4C881B215435000AA559 /* OCMyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B4C871B215435000AA559 /* OCMyVC.swift */; };
 		273B4C8D1B216C1F000AA559 /* WTRequestCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B4C8C1B216C1F000AA559 /* WTRequestCenter.swift */; };
 		273B4C8F1B216F09000AA559 /* UIKit+WTRequestCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B4C8E1B216F09000AA559 /* UIKit+WTRequestCenter.swift */; };
-		273B4C911B21746D000AA559 /* OCModelCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B4C901B21746D000AA559 /* OCModelCenter.swift */; };
+		273B4C911B21746D000AA559 /* ModelCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B4C901B21746D000AA559 /* ModelCenter.swift */; };
 		273B4C941B219DDE000AA559 /* OCHomeTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273B4C921B219DDE000AA559 /* OCHomeTitleCell.swift */; };
 		273B4C951B219DDE000AA559 /* OCHomeTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 273B4C931B219DDE000AA559 /* OCHomeTitleCell.xib */; };
 /* End PBXBuildFile section */
@@ -47,7 +47,7 @@
 		273B4C871B215435000AA559 /* OCMyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCMyVC.swift; sourceTree = "<group>"; };
 		273B4C8C1B216C1F000AA559 /* WTRequestCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WTRequestCenter.swift; sourceTree = "<group>"; };
 		273B4C8E1B216F09000AA559 /* UIKit+WTRequestCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIKit+WTRequestCenter.swift"; sourceTree = "<group>"; };
-		273B4C901B21746D000AA559 /* OCModelCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCModelCenter.swift; sourceTree = "<group>"; };
+		273B4C901B21746D000AA559 /* ModelCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelCenter.swift; sourceTree = "<group>"; };
 		273B4C921B219DDE000AA559 /* OCHomeTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OCHomeTitleCell.swift; sourceTree = "<group>"; };
 		273B4C931B219DDE000AA559 /* OCHomeTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OCHomeTitleCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +138,7 @@
 			children = (
 				273B4C5F1B21517D000AA559 /* AppDelegate.swift */,
 				273B4C631B21517D000AA559 /* Main.storyboard */,
+				273B4C901B21746D000AA559 /* ModelCenter.swift */,
 				273B4C661B21517D000AA559 /* Images.xcassets */,
 				273B4C681B21517D000AA559 /* LaunchScreen.xib */,
 			);
@@ -159,7 +160,6 @@
 				273B4C851B215427000AA559 /* OCHomeVC.swift */,
 				273B4C831B215411000AA559 /* OCAllClassesVC.swift */,
 				273B4C871B215435000AA559 /* OCMyVC.swift */,
-				273B4C901B21746D000AA559 /* OCModelCenter.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -276,7 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				273B4C8D1B216C1F000AA559 /* WTRequestCenter.swift in Sources */,
-				273B4C911B21746D000AA559 /* OCModelCenter.swift in Sources */,
+				273B4C911B21746D000AA559 /* ModelCenter.swift in Sources */,
 				273B4C861B215427000AA559 /* OCHomeVC.swift in Sources */,
 				273B4C8F1B216F09000AA559 /* UIKit+WTRequestCenter.swift in Sources */,
 				273B4C841B215411000AA559 /* OCAllClassesVC.swift in Sources */,

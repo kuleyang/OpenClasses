@@ -22,6 +22,10 @@ public enum Method: String {
     case CONNECT = "CONNECT"
 }
 
+
+
+
+
 public enum ParameterEncoding
 {
     /**
@@ -240,20 +244,16 @@ class WTRequestCenter: NSObject,NSURLSessionDelegate {
     
     class func doURLRequest(request:NSURLRequest,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)
     {
-        /*
-        NSURLSession.sharedSession().dataTaskWithRequest(request, completionHandler: { (data, response, error) -> Void in
-            if (error == nil){
-                finished(response: response, data: data);
-            }else
-            {
-                failed(error: error);
-            }
-        })
-*/
+
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
             if (error == nil){
+                var jsonResult: AnyObject? = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println(jsonResult)
+                
                 finished(response: response, data: data);
+                
+                
             }else
             {
                 failed(error: error);
