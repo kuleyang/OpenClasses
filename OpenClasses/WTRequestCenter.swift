@@ -51,10 +51,10 @@ public enum ParameterEncoding
     /**
     Creates a URL request by encoding parameters and applying them onto an existing request.
     
-    :param: URLRequest The request to have parameters applied
-    :param: parameters The parameters to apply
+    - parameter URLRequest: The request to have parameters applied
+    - parameter parameters: The parameters to apply
     
-    :returns: A tuple containing the constructed request and the error that occurred during parameter encoding, if any.
+    - returns: A tuple containing the constructed request and the error that occurred during parameter encoding, if any.
     */
     public func encode(URLRequest: URLRequestConvertible, parameters: [String: AnyObject]?) -> (NSURLRequest, NSError?) {
         if parameters == nil {
@@ -68,12 +68,12 @@ public enum ParameterEncoding
         case .URL:
             func query(parameters: [String: AnyObject]) -> String {
                 var components: [(String, String)] = []
-                for key in sorted(Array(parameters.keys), <) {
+                for key in Array(parameters.keys).sort(<) {
                     let value: AnyObject! = parameters[key]
                     components += self.queryComponents(key, value)
                 }
                 
-                return join("&", components.map{"\($0)=\($1)"} as [String])
+                return "&".join(components.map{"\($0)=\($1)"} as [String])
             }
             
             func encodesParametersInURL(method: Method) -> Bool {
@@ -99,15 +99,21 @@ public enum ParameterEncoding
                 mutableURLRequest.HTTPBody = query(parameters!).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
             }
         case .JSON:
-            let options = NSJSONWritingOptions.allZeros
-            if let data = NSJSONSerialization.dataWithJSONObject(parameters!, options: options, error: &error) {
+            let options = NSJSONWritingOptions()
+            do {
+                let data = try NSJSONSerialization.dataWithJSONObject(parameters!, options: options)
                 mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 mutableURLRequest.HTTPBody = data
+            } catch let error1 as NSError {
+                error = error1
             }
         case .PropertyList(let (format, options)):
-            if let data = NSPropertyListSerialization.dataWithPropertyList(parameters!, format: format, options: options, error: &error) {
+            do {
+                let data = try NSPropertyListSerialization.dataWithPropertyList(parameters!, format: format, options: options)
                 mutableURLRequest.setValue("application/x-plist", forHTTPHeaderField: "Content-Type")
                 mutableURLRequest.HTTPBody = data
+            } catch let error1 as NSError {
+                error = error1
             }
         case .Custom(let closure):
             return closure(mutableURLRequest, parameters)
@@ -157,7 +163,7 @@ extension String: URLStringConvertible {
 
 extension NSURL: URLStringConvertible {
     public var URLString: String {
-        return absoluteString!
+        return absoluteString
     }
 }
 
@@ -208,7 +214,7 @@ class WTRequestCenter: NSObject,NSURLSessionDelegate {
 
         delegateQueue = NSOperationQueue()
         
-        self.session = NSURLSession(configuration: configuration, delegate: SessionDelegate(), delegateQueue: delegateQueue)
+        self.session = NSURLSession(configuration: configuration!, delegate: SessionDelegate(), delegateQueue: delegateQueue)
         
         
         
@@ -237,8 +243,8 @@ class WTRequestCenter: NSObject,NSURLSessionDelegate {
     
     
     static func performBlock(block:() -> Void, afterDelay:Int64){
-        var queue = dispatch_get_main_queue()
-        var t = dispatch_time(DISPATCH_TIME_NOW, afterDelay*1000*1000*1000);
+        let queue = dispatch_get_main_queue()
+        let t = dispatch_time(DISPATCH_TIME_NOW, afterDelay*1000*1000*1000);
         dispatch_after(t, queue, block)
         
         
@@ -256,15 +262,15 @@ class WTRequestCenter: NSObject,NSURLSessionDelegate {
         
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response, data, error) -> Void in
             if (error == nil){
-                var jsonResult: AnyObject? = NSString(data: data, encoding: NSUTF8StringEncoding)
-                println(jsonResult)
+                let jsonResult: AnyObject? = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                print(jsonResult)
                 
-                finished(response: response, data: data);
+                finished(response: response!, data: data!);
                 
                 
             }else
             {
-                failed(error: error);
+                failed(error: error!);
             }
         }
         
@@ -276,7 +282,7 @@ class WTRequestCenter: NSObject,NSURLSessionDelegate {
     */
     class func doURLRequest(method:Method,urlString:URLStringConvertible,parameters:[String: AnyObject]? = nil,encoding: ParameterEncoding = .URL,finished:(response:NSURLResponse,data:NSData)-> Void,failed:(error:NSError)-> Void)
     {
-        var request = self.sharedInstance.request(method, urlString, parameters: parameters, encoding: encoding)
+        let request = self.sharedInstance.request(method, urlString, parameters: parameters, encoding: encoding)
         
         self.doURLRequest(request, finished: finished, failed: failed)
     }
@@ -294,15 +300,15 @@ class WTRequestCenter: NSObject,NSURLSessionDelegate {
         
         
         
-        var task = self.session.dataTaskWithRequest(request!, completionHandler: { (data, response, error) -> Void in
+        let task = self.session.dataTaskWithRequest(request!, completionHandler: { (data, response, error) -> Void in
             if ((response) != nil){
-                finished(response: response,data: data)
+                finished(response: response!,data: data!)
             }else{
-                failed(error: error)
+                failed(error: error!)
             }
             
         })
-        task.resume();
+        task!.resume();
         return task
     }
     
@@ -324,15 +330,15 @@ class WTRequestCenter: NSObject,NSURLSessionDelegate {
         {
             task = self.session.dataTaskWithRequest(request!, completionHandler: { (data, response, error) -> Void in
                 if ((response) != nil){
-                    finished(response: response,data: data)
+                    finished(response: response!,data: data!)
                     
-                    cachedResponse = NSCachedURLResponse(response: response, data: data, userInfo: nil, storagePolicy: NSURLCacheStoragePolicy.Allowed)
+                    cachedResponse = NSCachedURLResponse(response: response!, data: data!, userInfo: nil, storagePolicy: NSURLCacheStoragePolicy.Allowed)
                     WTRequestCenter.sharedCache.storeCachedResponse(cachedResponse, forRequest: request!)
                     
                     
                     
                 }else{
-                    failed(error: error)
+                    failed(error: error!)
                 }
                 
             })
@@ -397,7 +403,7 @@ public final class SessionDelegate:NSObject,NSURLSessionDelegate,NSURLSessionTas
     }
     
     
-    public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential!) -> Void){
+    public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void){
         
     }
     
@@ -412,7 +418,7 @@ public final class SessionDelegate:NSObject,NSURLSessionDelegate,NSURLSessionTas
     //-----------------------------NSURLSessionDataDelegate-----------------------------
     
     public func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveResponse response: NSURLResponse, completionHandler: (NSURLSessionResponseDisposition) -> Void){
-        println("didReceiveResponse")
+        print("didReceiveResponse")
     }
 }
 

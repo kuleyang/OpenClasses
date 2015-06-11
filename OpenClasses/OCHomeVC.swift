@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OCHomeVC: UITableViewController,UITableViewDelegate {
+class OCHomeVC : UITableViewController  {
 
 
     var homeArray:NSMutableArray?
@@ -93,7 +93,7 @@ class OCHomeVC: UITableViewController,UITableViewDelegate {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("OCHomeTitleCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("OCHomeTitleCell", forIndexPath: indexPath) as UITableViewCell
 
         // Configure the cell...
 

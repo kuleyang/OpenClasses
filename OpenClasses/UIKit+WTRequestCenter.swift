@@ -11,17 +11,12 @@ import UIKit
 
 
 extension UIApplication{
-    public static func AppVersion()->String?{
-        var version = NSBundle.mainBundle().infoDictionary
-        var result:String?
-        
-        return result
-    }
+
 }
 
 extension UIAlertView {
     static func showWithTitle(title:String?,message:String?){
-        var alert:UIAlertView? = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: nil);
+        let alert:UIAlertView? = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: nil);
         alert?.show();
         
         
@@ -44,7 +39,7 @@ extension UIImageView{
         if((url) != nil){
             WTRequestCenter.sharedInstance.GETUsingCache(url!, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
-                    var image:UIImage? = UIImage(data: data)
+                    let image:UIImage? = UIImage(data: data)
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         self.image = image
                     });
@@ -68,7 +63,7 @@ extension UIImageView{
         
         WTRequestCenter.sharedInstance.GETUsingCache(url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
-                var image:UIImage? = UIImage(data: data)
+                let image:UIImage? = UIImage(data: data)
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.highlightedImage = image
                 })
@@ -85,7 +80,7 @@ extension UIButton{
     func setImageWithURL(url:URLStringConvertible, forState state: UIControlState){
         WTRequestCenter.sharedInstance.GETUsingCache(url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
-                var image:UIImage? = UIImage(data: data)
+                let image:UIImage? = UIImage(data: data)
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.setImage(image, forState: state)
                 });
@@ -99,7 +94,7 @@ extension UIButton{
     func setBackgroundImageWithURL(url:URLStringConvertible, forState state: UIControlState){
         WTRequestCenter.sharedInstance.GETUsingCache(url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
-                var image:UIImage? = UIImage(data: data);
+                let image:UIImage? = UIImage(data: data);
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.setBackgroundImage(image, forState: state)
                 });
@@ -116,22 +111,7 @@ extension UIScrollView{
 
 extension UIColor
 {
-    static func colorWithHexString(string:String?)->UIColor{
-        var color:UIColor?
-        
-        
-        
-        return color!
-    }
-    
-    
-    static func integerValueFromHexString(string:String?)->Int{
-        var result:Int?
-        var scanner = NSScanner(string: string!)
-        
-        
-        return result!
-    }
+
     
 }
 
@@ -145,10 +125,7 @@ class WTNetworkActivityIndicatorManager:NSObject{
     var activityIndicatorVisibilityTimer:NSTimer?
     
     
-    static func sharedInstance(){
-        let instance:WTNetworkActivityIndicatorManager?
-        instance = WTNetworkActivityIndicatorManager()
-    }
+
     
     
     override init(){
