@@ -126,7 +126,10 @@ class WTNetworkActivityIndicatorManager:NSObject{
     
     
 
-    
+    static let sharedNetworkActivityIndicatorManager:WTNetworkActivityIndicatorManager? = {
+        let obj:WTNetworkActivityIndicatorManager = WTNetworkActivityIndicatorManager()
+        return obj
+    }()
     
     override init(){
         super.init()
