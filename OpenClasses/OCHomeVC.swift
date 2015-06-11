@@ -18,27 +18,58 @@ class OCHomeVC: UITableViewController,UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        configModel()
         configView()
-        request()
-
+        configModel()
+        handleNofiticaionts()
+    }
+    
+//    处理模型
+    func configModel(){
+        
+        WTRequestCenter.sharedQueue.addOperationWithBlock { () -> Void in
+            self.homeArray = NSMutableArray()
+            self.request()
+        }
         
     }
-    
-    func configModel(){
-        homeArray = NSMutableArray()
-    }
-    
+//    处理视图
     func configView(){
         self.tableView.registerNib(UINib(nibName: "OCHomeTitleCell", bundle: nil), forCellReuseIdentifier: "OCHomeTitleCell");
         
     }
     
     
-    
+//    请求数据
     func request(){
-
+        WTRequestCenter.doURLRequest(Method.GET, urlString: "", parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+//            todo:处理数据
+//            asdjsadklasjkda
+            
+//            使用数据
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                self.reloadUI()
+            })
+        }) { (error) -> Void in
+            
+        }
+    }
+    
+//    刷新UI
+    func reloadUI(){
+    
+    }
+    
+//    处理notification
+    func handleNofiticaionts(){
+        
+//
+        NSNotificationCenter.defaultCenter().addObserverForName("notificationName", object: nil, queue: NSOperationQueue.mainQueue()) { (note) -> Void in
+            
+            self.reloadUI()
+        }
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -116,7 +147,7 @@ class OCHomeVC: UITableViewController,UITableViewDelegate {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -124,6 +155,6 @@ class OCHomeVC: UITableViewController,UITableViewDelegate {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
     }
-    */
+
 
 }

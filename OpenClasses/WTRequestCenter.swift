@@ -226,7 +226,12 @@ class WTRequestCenter: NSObject,NSURLSessionDelegate {
         return WTRequestCenter(configuration: configuration)
         }()
 
-    
+    internal static let sharedQueue:NSOperationQueue = {
+        let queue:NSOperationQueue = NSOperationQueue()
+        
+        
+        return queue
+    }()
     
     
     
@@ -236,7 +241,10 @@ class WTRequestCenter: NSObject,NSURLSessionDelegate {
         var t = dispatch_time(DISPATCH_TIME_NOW, afterDelay*1000*1000*1000);
         dispatch_after(t, queue, block)
         
+        
+        
     }
+    
     
     
     

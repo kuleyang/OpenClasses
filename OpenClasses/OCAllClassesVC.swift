@@ -19,6 +19,32 @@ class OCAllClassesVC: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    
+    
+    var dataList:NSMutableArray?
+    
+    func configModel(){
+        WTRequestCenter.sharedQueue.addOperationWithBlock { () -> Void in
+            self.dataList = NSMutableArray()
+        }
+    }
+    
+    func configView(){
+        
+    }
+    
+    
+    func requestData(){
+        
+        WTRequestCenter.sharedQueue.addOperationWithBlock { () -> Void in
+            WTRequestCenter.doURLRequest(Method.GET, urlString: RequestInterface.classInfo.rawValue, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+                
+            }, failed: { (error) -> Void in
+                
+            })
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

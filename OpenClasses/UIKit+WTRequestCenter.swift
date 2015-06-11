@@ -8,6 +8,17 @@
 
 import Foundation
 import UIKit
+
+
+extension UIApplication{
+    public static func AppVersion()->String?{
+        var version = NSBundle.mainBundle().infoDictionary
+        var result:String?
+        
+        return result
+    }
+}
+
 extension UIAlertView {
     static func showWithTitle(title:String?,message:String?){
         var alert:UIAlertView? = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: nil);
@@ -28,21 +39,23 @@ extension UIImageView{
     
     
 //    setImage
-    func setImageWithURL(url:URLStringConvertible){
+    func setImageWithURL(url:URLStringConvertible?){
         
-        
-        
-        
-        WTRequestCenter.sharedInstance.GETUsingCache(url, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
-                var image:UIImage? = UIImage(data: data)
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.image = image
-                });
-            })
-        }) { (error) -> Void in
-            
+        if((url) != nil){
+            WTRequestCenter.sharedInstance.GETUsingCache(url!, parameters: nil, encoding: ParameterEncoding.URL, finished: { (response, data) -> Void in
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+                    var image:UIImage? = UIImage(data: data)
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.image = image
+                    });
+                })
+                }) { (error) -> Void in
+                    
+            }
         }
+        
+        
+        
         
     }
     
