@@ -133,19 +133,18 @@ class WTNetworkActivityIndicatorManager:NSObject{
     
     override init(){
         super.init()
+        
+        
         activityCount!=0
+        
+        
+        
     }
     
-    /*
-    //请求开始的消息
-    NSString * const WTNetworkingOperationDidStartNotification = @"WTNetworkingOperationDidStartNotification";
-    //请求结束的消息
-    NSString * const WTNetworkingOperationDidFinishNotification = @"WTNetworkingOperationDidFinishNotification";
 
-    */
     
-    let startNotification = "WTNetworkingOperationDidStartNotification"
-    let endNotification = "WTNetworkingOperationDidFinishNotification"
+    let startNotification = "WTNetworking Operation Did Start Notification"
+    let endNotification = "WTNetworking Operation Did Finish Notification"
     func handleNofitications(){
         
         NSNotificationCenter.defaultCenter().addObserverForName(startNotification, object: nil, queue: NSOperationQueue.mainQueue()) { (note) -> Void in
