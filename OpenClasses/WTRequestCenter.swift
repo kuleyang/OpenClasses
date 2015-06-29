@@ -68,7 +68,7 @@ public enum ParameterEncoding
         case .URL:
             func query(parameters: [String: AnyObject]) -> String {
                 var components: [(String, String)] = []
-                for key in Array(parameters.keys).sort(<) {
+                for key in sorted(Array(parameters.keys), <) {
                     let value: AnyObject! = parameters[key]
                     components += self.queryComponents(key, value)
                 }
@@ -100,21 +100,18 @@ public enum ParameterEncoding
             }
         case .JSON:
             let options = NSJSONWritingOptions()
-            do {
-                let data = try NSJSONSerialization.dataWithJSONObject(parameters!, options: options)
+            
+            let data = NSJSONSerialization.dataWithJSONObject(parameters!, options: options, error: &error)
                 mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 mutableURLRequest.HTTPBody = data
-            } catch let error1 as NSError {
-                error = error1
-            }
+            
         case .PropertyList(let (format, options)):
-            do {
-                let data = try NSPropertyListSerialization.dataWithPropertyList(parameters!, format: format, options: options)
+            
+            if let data = NSPropertyListSerialization.dataWithPropertyList(parameters!, format: format, options: options, error: &error) {
                 mutableURLRequest.setValue("application/x-plist", forHTTPHeaderField: "Content-Type")
                 mutableURLRequest.HTTPBody = data
-            } catch let error1 as NSError {
-                error = error1
             }
+            
         case .Custom(let closure):
             return closure(mutableURLRequest, parameters)
         }
@@ -163,7 +160,7 @@ extension String: URLStringConvertible {
 
 extension NSURL: URLStringConvertible {
     public var URLString: String {
-        return absoluteString
+        return absoluteString!
     }
 }
 
@@ -308,7 +305,7 @@ class WTRequestCenter: NSObject,NSURLSessionDelegate {
             }
             
         })
-        task!.resume();
+        task.resume();
         return task
     }
     
@@ -403,9 +400,6 @@ public final class SessionDelegate:NSObject,NSURLSessionDelegate,NSURLSessionTas
     }
     
     
-    public func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void){
-        
-    }
     
     
     //-----------------------------NSURLSessionTaskDelegate-----------------------------

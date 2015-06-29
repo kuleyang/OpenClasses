@@ -93,7 +93,7 @@ class OCHomeVC : UITableViewController  {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("OCHomeTitleCell", forIndexPath: indexPath) as UITableViewCell
+        let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("OCHomeTitleCell", forIndexPath: indexPath) as! UITableViewCell
 
         // Configure the cell...
 

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>1D2D8625-D468-4077-93F1-D610D0BB5028</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>OpenClasses</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>DFA0B907A0BBC1A59FBB7BA42ECB0747D00B8394</key>
 		<string>https://github.com/swtlovewtt/OpenClasses.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>OpenClasses.xcodeproj/project.xcworkspace</string>
+	<string>OpenClasses.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DFA0B907A0BBC1A59FBB7BA42ECB0747D00B8394</key>
