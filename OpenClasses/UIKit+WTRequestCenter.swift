@@ -111,7 +111,41 @@ extension UIScrollView{
 
 extension UIColor
 {
-
+    
+    static func wtColorWithRed(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor{
+        return self.wtColorWithRed(red, green: green, blue: blue, alpha: 1.0);
+    }
+    
+    static func wtColorWithRed(red: CGFloat, green: CGFloat, blue: CGFloat, alpha:CGFloat) -> UIColor{
+        return UIColor(red: red/255.0, green: green/255.0, blue: blue/255.0, alpha: alpha);
+    }
+    
+    static func wtColorWithHexString(hexString:String?)->UIColor?{
+        var trimString:String! = hexString
+        var length = trimString?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+        
+        if (trimString?.hasPrefix("#") == true){
+            trimString = trimString.substringFromIndex(trimString.startIndex)
+        }
+        length = trimString?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+        if(length == 2){
+            trimString = trimString + trimString + trimString + trimString + trimString + trimString
+        }
+        
+        if(length == 3){
+            
+        }
+        
+        return self.wtColorWithRed(1, green: 1, blue: 1)
+    }
+    
+    static func intervalueFromhexString(hexString:String)->UInt32{
+        var scanner = NSScanner(string: hexString)
+        var a:UInt32 = 0
+        scanner.scanHexInt(&a);
+        return a;
+    }
+    
     
 }
 
