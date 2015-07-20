@@ -21,3 +21,9 @@ void doTheThing(int type){
     fnc();
 }
 ```
+
+
+``` Objective-C
+    id returnValue = [someObject messageName:parameter];
+
+```
