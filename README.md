@@ -12,10 +12,12 @@ void printGoodbye(){
 }
 
 void doTheThing(int type){
+    void (*fnc)();
     if(type ==0){
-        printHello();
+        fnc = printHello;
     }else{
-        printGoodbye();
+        fnc = printGoodbye;
     }
+    fnc();
 }
 ```
